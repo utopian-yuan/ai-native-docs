@@ -1,8 +1,21 @@
 # ai-native-docs
 
-一套给团队开发者和 AI 编码助手共用的 Markdown 文档模板，提炼自 EDTQ 项目的协作实践。一个需求由多人并行开发，或者做到一半换人、换 AI 会话，下一位都可以打开同一个工作项，找到已经定下来的方案、自己能接的任务和可以复验的结果。整个流程只需要 Git 和 Markdown。
+一套给团队开发者和 AI 编码助手共用的项目文档体系，提炼自 EDTQ 和 grant-pilot 的完整 `docs/` 结构。产品范围、架构与契约、开发计划、执行分工、验证、发布和归档都与代码一起维护。多人并行开发或换人、换 AI 会话时，可以从仓库接续工作。日常维护使用 Git 和 Markdown。
 
-第一次使用，可以先看 [三人共用的 CSV 导出工作项](examples/csv-export/FEAT-20261110-csv-export/change.md) 和 [三次改版的署名记录](examples/csv-export/CHANGELOG.md)，再取用 [四件套模板](docs/_templates/change/)。要把现有产品、架构、指南也纳入管理，可从 [文档维护入口](docs/README.md) 开始。
+从 [docs 文档中心](docs/README.md) 查看 17 类目录及其职责，从 [目录对照](docs/guides/source-directory-map.md) 查看两个参考项目的每类目录对应到哪里。首次使用可以跟随 [CSV 导出从需求到交付的案例](examples/csv-export/README.md)，看三人怎样共用四件套并记录三次改版。
+
+## 完整文档目录
+
+| 工作阶段 | 目录 | 团队在这里维护什么 |
+| --- | --- | --- |
+| 定义产品与计划 | `product/`、`plan/` | 产品简报、MVP 基线、需求卡与验收条件、路线图及跨团队分工 |
+| 定义技术与数据 | `architecture/`、`data/` | 系统现状、设计资产、接口契约、架构决策、数据接入与恢复 |
+| 实施与交接 | `features/`、`bugs/`、`tasks/`、`_templates/` | 工作项四件套、任务认领、验收证据及分类归档 |
+| 开发与运行 | `guides/`、`superpowers/` | 开发联调、用户和运维手册，以及工具产生的设计草案与执行计划 |
+| 评审与交付 | `approvals/`、`reviews/`、`reports/`、`releases/`、`changes/` | 授权决定、评审结论、可复核的验证结果、发布记录及按人署名的 CHANGELOG |
+| 材料与历史 | `references/`、`archive/` | 来源、原始资料、原型、历史架构及被替代的计划 |
+
+产品、设计、执行和发布各维护自己的事实，再通过链接连起来。例如从需求卡可以找到接口契约和 FEAT，在 FEAT 的证据里看到跑了什么，在发布记录里看到哪一版进入了哪个环境。目录归属和冲突处理详见 [规范归属](docs/architecture/authority.md)。
 
 ## 团队怎么共用四件套
 
@@ -21,7 +34,7 @@
 
 ## 每个人的改版怎么记到 CHANGELOG
 
-**每交付一版，就在根目录的 `CHANGELOG.md` 增加一条。** 合入团队分支、把可联调的阶段版本交给同事、发布修复，都可以构成一次交付。贡献者随自己的 PR 写，工作项负责人在合入时核对；直接提交的仓库可以链接交付提交。同一批改动从多次保存到一次交付，只需一条。交付后再次改变行为，就新增一条，让读者能看到前后两版各改了什么。
+**每交付一版，就在 `docs/changes/CHANGELOG.md` 增加一条。** 合入团队分支、把可联调的阶段版本交给同事、发布修复，都可以构成一次交付。贡献者随自己的 PR 写，工作项负责人在合入时核对。直接提交的仓库可以链接交付提交。同一批改动从多次保存到一次交付，只需一条。交付后再次改变行为，就新增一条，让读者能看到前后两版各改了什么。
 
 每条写清日期、改了什么、交付时的负责人、实际贡献者和各自的改动，并链接**工作项、该次证据、PR 或提交**。工程已交付、仍待人工验收时，把这个事实写在条目里。
 
@@ -32,31 +45,17 @@
 | 甲负责，乙实施，丙代提交 | 「负责人」填甲，「贡献」填乙并写明所做改动。丙若也有实际贡献，一并列出 |
 | 中途换负责人，或 AI 代写记录 | 旧条目保留当时署名。新条目用交付时的负责人；AI 执行的内容具名写明，人的决定引用当事人记录 |
 
-在 CHANGELOG 中搜索 `@账号` 就能查个人交付。例如在本仓库运行 `git grep -F '@sample-api' -- examples/csv-export/CHANGELOG.md`，可以同时找到其独立交付的接口和参与修复的版本。点进证据即可查看验证范围。[三次改版的完整记录](examples/csv-export/CHANGELOG.md) · [本项目的真实变更记录](CHANGELOG.md)
+在 CHANGELOG 中搜索 `@账号` 就能查个人交付。例如在本仓库运行 `git grep -F '@sample-api' -- examples/csv-export/CHANGELOG.md`，可以同时找到其独立交付的接口和参与修复的版本。点进证据即可查看验证范围。[三次改版的完整记录](examples/csv-export/CHANGELOG.md) · [本项目的真实变更记录](docs/changes/CHANGELOG.md)
 
 ## 把模板带进自己的项目
 
-1. 将本仓库克隆到本地。在目标项目根目录执行下面的命令，把第一行改成模板仓库在你机器上的实际路径。新项目和已有项目都可以这样接入。
+1. 将本仓库克隆到本地。在目标项目根目录运行以下命令，将路径换成模板仓库的位置。脚本安装完整目录、目录说明、模板和 Agent 入口。
 
    ```sh
-   kit=/path/to/ai-native-docs
-   mkdir -p docs/_templates/change
-   copy_missing() {
-     if [ -e "$2" ] || [ -L "$2" ]; then
-       printf '保留已有文件 %s\n' "$2"
-     else
-       cp "$1" "$2"
-     fi
-   }
-   for name in change design tasks evidence; do
-     copy_missing "$kit/docs/_templates/change/$name.md" "docs/_templates/change/$name.md"
-   done
-   copy_missing "$kit/AGENTS.md" AGENTS.md
-   copy_missing "$kit/CLAUDE.md" CLAUDE.md
-   copy_missing "$kit/docs/_templates/CHANGELOG.md" CHANGELOG.md
+   sh "/path/to/ai-native-docs/scripts/install-docs.sh" .
    ```
 
-   命令会列出保留的同名文件。已有规则的项目由维护者合并适用条款，并在已有 `CLAUDE.md` 中按需加入 `@AGENTS.md`。已有 CHANGELOG 可以沿用原位置，同步调整规则中的路径。在项目 README 加上四件套模板、规则和变更记录的入口。
+   已有项目的同名文件逐一保留。项目若已有根 CHANGELOG 且 `docs/changes/` 尚无日志，安装会生成指向原日志的入口。合并已有 README 和 AGENTS.md 时，补上文档中心入口与本项目真实的契约、测试和运行路径。新项目可以先填写产品简报、MVP 基线、系统概览和路线图，再按下面的方法开始第一个工作项。[接入与迁移](docs/guides/adoption.md)
 
 2. 先搜项目里的工作项或 Issue。同目标已有记录就接着写；新目标从模板复制四个文件。以下命令在目标项目根目录执行，只有新建工作项目录成功才会复制，防止覆盖进行中的工作。
 
