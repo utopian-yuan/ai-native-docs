@@ -1,6 +1,13 @@
-# 文档与工作项模板
+# 工作项模板
 
-- [四件套](change/) 包含 change、design、tasks、evidence 四个文件。复制到对应目录，把 ID 和类型改为实际值。任务指向 AC，证据指向任务和验收。
-- 工作项需要设计附件时可复制 [assets](work-item-assets/assets/README.md)，可复验的截图或脱敏样本放 [evidence-assets](work-item-assets/evidence-assets/README.md)。
-- [新项目 CHANGELOG](CHANGELOG.md) 用于没有交付历史的项目。工作项地址以日志所在目录为基准。
-- 需求、ADR、接口契约、评审、报告和发布模板维护在对应分类下。从 [文档中心](../README.md) 按用途进入。
+这里保存团队共用的工作项格式。建单前先找是否已有同一目标。确定需要新建后，把 [change 目录](change/README.md) 的四份工作文档和阅读入口一起复制到 features、bugs 或 tasks 的 ID 目录。复制的是新工作项的起点，原模板由团队共同维护。
+
+| 从哪里下笔 | 要写的关键事实 | 已填好的例子 |
+| --- | --- | --- |
+| FEAT | 要服务的角色、原有流程、新行为、异常场景和验收条件 | [我的待办](../features/FEAT-20260511-example-my-open/change.md) |
+| BUG | 受影响版本、前置条件、最短复现、实际和预期、修后同条件复验 | [分页缺陷](../bugs/BUG-20260513-example-filter-page/change.md) |
+| TASK | 工程收益、交接对象、稳定输入、交付物和复做方法 | [固定冒烟样本](../tasks/TASK-20260512-example-filter-smoke/change.md) |
+
+这套模板参考了 `jingshen-aireview` 对背景和边界、风险、设计取舍、回滚、四阶段任务、测试覆盖与复审的写法。本项目保留 change.md 的 JSON 元数据和人类验收字段，便于接续已有记录。
+
+**填写顺序**。先用一句话写预期行为，给可验收的结果编号，再把 AC 分解成可认领的任务。设计只展开实际受影响的部分。每跑一次验证就补一条带版本的证据，最后回到 AC 作结论。未执行、失败、待决定分别写清。

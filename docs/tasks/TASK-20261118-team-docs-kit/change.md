@@ -32,4 +32,4 @@
 
 发起人已接受首版方案。工程交付范围及实际验证见[证据](evidence.md)，最终团队适用性待 @utopian-yuan 验收。
 
-[设计](design.md) · [任务和交接](tasks.md) · [真实交付记录](../../../CHANGELOG.md)
+[设计](design.md) · [任务和交接](tasks.md) · [真实交付记录](../../changes/CHANGELOG.md)

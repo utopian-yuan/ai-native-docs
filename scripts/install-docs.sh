@@ -23,12 +23,13 @@ copy_missing() {
   fi
 }
 
-# 枚举模板库维护的文档结构，应用仓库自己的记录留在模板库。
+# 保留可追读的教学工作项。模板库自身的任务和发布历史不写入新项目。
 cd "$kit"
 find docs -type f \( -name '*.md' -o -name '*.json' \) -print |
   while IFS= read -r path; do
     case "$path" in
-      docs/tasks/TASK-*/* | docs/changes/CHANGELOG.md) continue ;;
+      docs/*/*-example-*/*) ;;
+      docs/*/TASK-*/* | docs/*/FEAT-*/* | docs/*/BUG-*/* | docs/changes/CHANGELOG.md) continue ;;
     esac
     copy_missing "$path" "$path"
   done
@@ -37,10 +38,12 @@ copy_missing AGENTS.md AGENTS.md
 copy_missing CLAUDE.md CLAUDE.md
 
 log=docs/changes/CHANGELOG.md
-if exists "$target/CHANGELOG.md" && ! exists "$target/$log"; then
+if exists "$target/$log"; then
+  printf '保留 %s\n' "$log"
+elif [ -f "$target/CHANGELOG.md" ]; then
   printf '# CHANGELOG\n\n沿用项目的 [根变更日志](../../CHANGELOG.md)。\n' > "$target/$log"
   printf '添加 %s，链接现有根日志\n' "$log"
 else
-  copy_missing docs/_templates/CHANGELOG.md "$log"
-  copy_missing CHANGELOG.md CHANGELOG.md
+  printf '# CHANGELOG\n\n按交付日期倒序记录每版变化、负责人、贡献者、证据和版本。[填写说明](README.md)\n' > "$target/$log"
+  printf '添加 %s\n' "$log"
 fi

@@ -1,13 +1,14 @@
-# 开发和运维指南
+# 使用、开发与运行手册
 
-| 任务 | 指南 |
+这些文档供接手人按步骤操作。维护者给出真实的前置条件、入口或命令、预期观察、失败后的处理办法和适用版本。一次具体执行的结果进入工作项证据。
+
+| 所处场景 | 手册 |
 | --- | --- |
-| 将整套文档接入项目 | [接入与迁移](adoption.md) |
-| 开发、联调、用 AI 协作、接手工作 | [团队开发流程](development.md) · [AGENTS.md 编写](writing-agents.md) |
-| 对接口与 Mock | [接口与 Mock 联调](contract-workflow.md) |
-| 选择验证范围、写证据 | [验证指南](verification.md) |
-| 引导用户操作 | [用户手册](user-manual.md) · [手册附件](assets/README.md) |
-| 部署、排障、备份和恢复 | [运行手册](operations.md) · [数据运维](../data/operations.md) |
-| 从参考项目迁移目录 | [目录对照](source-directory-map.md) |
+| 第一次将模板带入已有仓库 | [接入与迁移](adoption.md) · [本版目录来源](source-directory-map.md) |
+| 给开发者和 AI 配置同一套规则 | [团队协作](development.md) · [编写 AGENTS.md](writing-agents.md) |
+| 前后端并行、核对接口与 Mock | [接口联调](contract-workflow.md) |
+| 决定这次要验证到哪一层 | [验证及证据等级](verification.md) |
+| 写面向用户的操作步骤 | [使用手册格式](user-manual.md) |
+| 部署后冒烟、排障或回退 | [运行手册](operations.md) |
 
-命令和入口按实际仓库填写并走查。一次运行的结果写到相应工作项或报告。
+流程变化时由实际操作者先复做，再更新相应手册和引用。
